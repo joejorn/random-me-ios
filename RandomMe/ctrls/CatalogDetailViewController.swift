@@ -54,7 +54,7 @@ class CatalogDetailViewController: UIViewController {
         self.title = self.catalog.name
         
         self.notifications.append(
-            catalog.addNotificationBlock { change in
+			catalog.observe { change in
                 switch change {
                 case .change(let properties):
                     for property in properties {
@@ -77,7 +77,7 @@ class CatalogDetailViewController: UIViewController {
         )
         
         self.notifications.append(
-            catalog.items.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+			catalog.items.observe { [weak self] (changes: RealmCollectionChange) in
                 
                 switch changes {
                     
@@ -113,7 +113,7 @@ class CatalogDetailViewController: UIViewController {
     
     deinit {
         for token in self.notifications {
-            token.stop()
+			token.invalidate()
         }
     }
     

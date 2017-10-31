@@ -29,7 +29,7 @@ class CatalogCollectionViewController: UICollectionViewController {
         self.prepareCustomLayout()
         
         self.dataset = self.helper.getAllCatalogs()
-        self.notification = self.dataset.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+		self.notification = self.dataset.observe { [weak self] (changes: RealmCollectionChange) in
             
             switch changes {
             case .initial, .update(_):
@@ -45,7 +45,7 @@ class CatalogCollectionViewController: UICollectionViewController {
 	
 	
     deinit {
-        self.notification?.stop()
+		self.notification?.invalidate()
     }
 	
 	
