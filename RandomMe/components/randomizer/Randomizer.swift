@@ -16,10 +16,10 @@ class Randomizer: NSObject {
     private var timer: Timeout? = nil
     var items = [Any]()
     
-    private var changing: ( (Any?) -> Void )?
-    private var completion: ( (Any?) -> Void )?
+    var changing: ( (Any?) -> Void )?
+    var completion: ( (Any?) -> Void )?
     
-    init(items: [Any], onChanges changing: @escaping (Any?) -> Void, onComplete completion: @escaping (Any?) -> Void) {
+	init(items: [Any], onChanges changing: ((Any?) -> Void)?, onComplete completion: ((Any?) -> Void)? ) {
         
         self.items = items
         self.changing = changing

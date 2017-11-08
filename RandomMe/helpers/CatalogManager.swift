@@ -16,7 +16,6 @@ final class CatalogManager {
     fileprivate var realm : Realm!
     
     private init() {
-//        self.realm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: "TestInMemoryRealm"))
         self.realm = try! Realm()
     }
     

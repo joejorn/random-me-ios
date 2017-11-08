@@ -43,12 +43,14 @@ class CatalogFormViewController: FormViewController {
     
     @IBAction func onSubmit(_ sender: Any) {
         let values = self.form.values()
-        
+		
+		// properties with "cat" prefix
         var catValues = self.filterKeyValues(values: values, withPrefix: "cat")
         catValues["color"] = CategoryColor.parse(colorName: catValues["color"] as! String)
         
         let _catalog = self.submitCatalog(values: catValues, catalog: self.catalog)
-
+		
+		// properties with "item" prefix
         let itemValues = self.filterKeyValues(values: values, withPrefix: "item")
         self.submitCatalogItems(values: itemValues, catalog: _catalog)
         
@@ -197,13 +199,10 @@ extension CatalogFormViewController: FormController {
             if let val = values["\(item.id)"] { // update value
                 
                 if ((val as! String) != item.name) {
-                    print("update catalog item with id: '\(item.id)', name -> '\(val)'")
                     self.itemHelper.setItem(item, withValues: ["name": val])
                 }
                 
             } else { // item has been deleted
-                
-                print("!! remove catalog item: '\(item.name)'")
                 self.itemHelper.removeItem(item)
             }
         })
